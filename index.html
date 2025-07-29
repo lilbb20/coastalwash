@@ -1,77 +1,38 @@
+# Re-executing after code environment reset: regenerate the HTML file again
+
+html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Coastal Wash</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&family=Fredoka:wght@400;600&family=Smothie+Bubble&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Fredoka', sans-serif;
+      font-family: 'Inter', sans-serif;
       background: linear-gradient(to bottom, #d0f2f5 0%, #ffffff 100%);
       color: #023040;
       overflow-x: hidden;
       position: relative;
     }
-    .bubble {
-      position: absolute;
-      bottom: -100px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      animation: rise 20s infinite ease-in;
-      z-index: -1;
-    }
-    @keyframes rise {
-      0% { transform: translateY(0) scale(1); opacity: 0; }
-      50% { opacity: 0.4; }
-      100% { transform: translateY(-120vh) scale(1.3); opacity: 0; }
-    }
     header {
-      position: relative;
       text-align: center;
       padding: 2rem 1rem 1rem;
       background: #005670;
       color: white;
-      overflow: hidden;
-    }
-    .header-bubbles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .header-bubbles .bubble {
-      position: absolute;
-      bottom: -50px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 50%;
-      animation: riseHeader 25s infinite ease-in;
-    }
-    @keyframes riseHeader {
-      0% { transform: translateY(0) scale(1); opacity: 0; }
-      50% { opacity: 0.4; }
-      100% { transform: translateY(-150px) scale(1.2); opacity: 0; }
     }
     header h1 {
-      font-family: 'Smothie Bubble', cursive;
-      font-size: 6rem;
+      font-size: 3.5rem;
       font-weight: 700;
       margin: 0.5rem 0;
       color: #ffffff;
-      letter-spacing: 3px;
-      text-shadow: 0 0 6px #87cefa, 0 0 12px #00bfff;
-      position: relative;
-      z-index: 1;
+      letter-spacing: 1px;
     }
     header p {
       font-size: 1.2rem;
       font-weight: 400;
-      position: relative;
-      z-index: 1;
     }
     .cta {
       background: #008ca4;
@@ -92,6 +53,8 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       margin-bottom: 2rem;
       transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
     .card:hover {
       transform: translateY(-5px);
@@ -130,21 +93,39 @@
       padding: 2rem;
       border-radius: 20px;
     }
+
+    .bubble-background {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bubble-background .bubble {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      animation: riseForm 30s infinite ease-in;
+      z-index: 0;
+    }
+
+    @keyframes riseForm {
+      0% { transform: translateY(0) scale(1); opacity: 0; }
+      50% { opacity: 0.3; }
+      100% { transform: translateY(-100vh) scale(1.3); opacity: 0; }
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="header-bubbles"></div>
     <h1>Coastal Wash</h1>
-    <p>Premium Pressure-Washing for Your Home</p>
+    <p>Premium Pressure Washing in South Florida</p>
   </header>
 
-  <div class="cta">Serving Florida | Book Thurs–Sun, 10AM–6PM</div>
+  <div class="cta">Open Thursday–Sunday | Book from 10AM–6PM | Text Confirmations Required</div>
 
   <section>
-    <div class="card">
+    <div class="card bubble-background">
       <h2>Book a Service</h2>
-      <form action="https://formspree.io/f/mpwlreey" method="POST">
+      <form>
         <label for="name">Full Name</label>
         <input type="text" id="name" name="name" required>
 
@@ -164,11 +145,8 @@
           <option value="trash-bin">Trash Bin Wash</option>
           <option value="garage">Garage Floor Wash</option>
           <option value="sidewalk">Sidewalk Cleaning</option>
-          <option value="custom">Other (please describe below)</option>
+          <option value="custom">Other</option>
         </select>
-
-        <input type="hidden" name="_next" value="https://lilbb20.github.io/coastalwash/thank-you.html">
-        <input type="hidden" name="_captcha" value="false">
 
         <label for="time">Preferred Date & Time</label>
         <input type="datetime-local" id="time" name="time" required>
@@ -184,41 +162,33 @@
 
     <div class="about">
       <h2>About Coastal Wash</h2>
-      <p>Coastal Wash was built to bring a fresh, clean look back to homes throughout Florida. Whether you're prepping for an event or just want to boost curb appeal, we deliver professional results with Florida-style service.</p>
+      <p>We bring a clean, refreshed look to homes across South Florida. From patios to driveways, we deliver quality work with local charm. Our Florida-based pressure washing service puts your satisfaction first with easy booking and real results.</p>
     </div>
   </section>
 
   <script>
-    // background bubbles
-    for (let i = 0; i < 20; i++) {
+    const card = document.querySelector('.bubble-background');
+    for (let i = 0; i < 30; i++) {
       const bubble = document.createElement('div');
       bubble.classList.add('bubble');
-      const size = Math.random() * 60 + 20;
+      const size = Math.random() * 40 + 10;
       bubble.style.width = `${size}px`;
       bubble.style.height = `${size}px`;
       bubble.style.left = `${Math.random() * 100}%`;
-      bubble.style.animationDuration = `${10 + Math.random() * 15}s`;
+      bubble.style.bottom = `${Math.random() * -100}px`;
+      bubble.style.animationDuration = `${15 + Math.random() * 10}s`;
       bubble.style.animationDelay = `${Math.random() * 5}s`;
-      bubble.style.opacity = Math.random() * 0.5 + 0.2;
-      document.body.appendChild(bubble);
+      bubble.style.opacity = Math.random() * 0.4 + 0.2;
+      card.appendChild(bubble);
     }
-
-    // header bubbles
-    window.addEventListener('DOMContentLoaded', () => {
-      const header = document.querySelector('.header-bubbles');
-      for (let i = 0; i < 10; i++) {
-        const bubble = document.createElement('div');
-        bubble.classList.add('bubble');
-        const size = Math.random() * 60 + 40;
-        bubble.style.width = `${size}px`;
-        bubble.style.height = `${size}px`;
-        bubble.style.left = `${Math.random() * 100}%`;
-        bubble.style.animationDuration = `${10 + Math.random() * 10}s`;
-        bubble.style.animationDelay = `${Math.random() * 5}s`;
-        bubble.style.opacity = Math.random() * 0.4 + 0.6;
-        header.appendChild(bubble);
-      }
-    });
   </script>
 </body>
 </html>
+"""
+
+# Save the content as an HTML file
+file_path = "/mnt/data/coastalwash_bubbles.html"
+with open(file_path, "w") as f:
+    f.write(html_content)
+
+file_path
