@@ -1,5 +1,3 @@
-# Re-executing after code environment reset: regenerate the HTML file again
-
 html_content = """
 <!DOCTYPE html>
 <html lang="en">
@@ -184,11 +182,3 @@ html_content = """
   </script>
 </body>
 </html>
-"""
-
-# Save the content as an HTML file
-file_path = "/mnt/data/coastalwash_bubbles.html"
-with open(file_path, "w") as f:
-    f.write(html_content)
-
-file_path
