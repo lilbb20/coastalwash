@@ -165,9 +165,59 @@
       <p>We bring a clean, refreshed look to homes across South Florida. From patios to driveways, we deliver quality work with local charm. Our Florida-based pressure washing service puts your satisfaction first with easy booking and real results.</p>
     </div>
   </section>
+<div class="card bubble-background">
+
+  <h2>Contact Us</h2>
+  <form action="https://formspree.io/f/mpwlreey" method="POST">
+    <label for="email">Your Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Your Message</label>
+    <textarea id="message" name="message" rows="4" required></textarea>
+
+    <button type="submit">Send</button>
+  </form>
+</div>
 
   <script>
-  const card = document.querySelector('.card');
+  const cards = document.querySelectorAll('.bubble-background');
+  cards.forEach(card => {
+    for (let i = 0; i < 25; i++) {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      const size = Math.random() * 40 + 10;
+      bubble.style.width = `${size}px`;
+      bubble.style.height = `${size}px`;
+      bubble.style.left = `${Math.random() * 100}%`;
+      bubble.style.bottom = `${Math.random() * -100}px`;
+      bubble.style.animationDuration = `${15 + Math.random() * 10}s`;
+      bubble.style.animationDelay = `${Math.random() * 5}s`;
+      bubble.style.opacity = Math.random() * 0.4 + 0.2;
+      card.appendChild(bubble);
+    }
+  });
+</script>
+
+  const cards = document.querySelectorAll('.bubble-background');
+  cards.forEach(card => {
+    for (let i = 0; i < 25; i++) {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      const size = Math.random() * 40 + 10;
+      bubble.style.width = `${size}px`;
+      bubble.style.height = `${size}px`;
+      bubble.style.left = `${Math.random() * 100}%`;
+      bubble.style.bottom = `${Math.random() * -100}px`;
+      bubble.style.animationDuration = `${15 + Math.random() * 10}s`;
+      bubble.style.animationDelay = `${Math.random() * 5}s`;
+      bubble.style.opacity = Math.random() * 0.4 + 0.2;
+      card.appendChild(bubble);
+    }
+  });
+</script>
+
+});
+
   for (let i = 0; i < 25; i++) {
     const bubble = document.createElement('div');
     bubble.classList.add('bubble');
