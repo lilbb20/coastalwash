@@ -196,27 +196,6 @@
       card.appendChild(bubble);
     }
   });
-</script>
-
-  const cards = document.querySelectorAll('.bubble-background');
-  cards.forEach(card => {
-    for (let i = 0; i < 25; i++) {
-      const bubble = document.createElement('div');
-      bubble.classList.add('bubble');
-      const size = Math.random() * 40 + 10;
-      bubble.style.width = `${size}px`;
-      bubble.style.height = `${size}px`;
-      bubble.style.left = `${Math.random() * 100}%`;
-      bubble.style.bottom = `${Math.random() * -100}px`;
-      bubble.style.animationDuration = `${15 + Math.random() * 10}s`;
-      bubble.style.animationDelay = `${Math.random() * 5}s`;
-      bubble.style.opacity = Math.random() * 0.4 + 0.2;
-      card.appendChild(bubble);
-    }
-  });
-</script>
-
-});
 
   for (let i = 0; i < 25; i++) {
     const bubble = document.createElement('div');
